@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # ---------------- LOAD DATA ---------------- #
-df = pd.read_csv("data/sample_train.csv")
+df = pd.read_csv("sample_train.csv")
 # ---------------- LOAD MODEL ---------------- #
 model = pickle.load(open("model.pkl", "rb"))
 # ---------------- SIDEBAR ---------------- #
