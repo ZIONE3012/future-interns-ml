@@ -160,17 +160,16 @@ st.markdown("### Real-Time Retail Analytics & Al Forecasting")
 
 st.markdown("----")
 
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Overview",
     "Predictions",
     "Business Insights",
     "Forecast Results",
     "Project Summary"
 ])
-st.markdown("Advanced analytics and forecasting dashboard for retail sales.")
-with tab1:
 
-st.markdown("<br>", unsafe_allow_html=True)    
+with tab1:
+    st.markdown("<br>", unsafe_allow_html=True)    
 # ---------------- KPI CARDS ---------------- #
     total_sales = int(filtered_df["sales"].sum())
     avg_sales = int(filtered_df["sales"].mean())
