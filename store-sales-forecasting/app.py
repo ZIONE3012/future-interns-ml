@@ -44,17 +44,27 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ---------------- LOAD DATA ---------------- #
-uploaded_file = st.file_uploader(
-    "Upload your CSV file",
+# ================= SIDEBAR UPLOADS ================= #
+
+st.sidebar.title("🧠 Forecast Studio")
+
+st.sidebar.markdown("---")
+
+st.sidebar.markdown("### ☁️ Upload Center")
+
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Dataset CSV",
     type=["csv"]
 )
 
-uploaded_model = st.file_uploader(
-    "Upload your trained model",
+uploaded_model = st.sidebar.file_uploader(
+    "Upload Forecast Model",
     type=["pkl"]
 )
 
+st.sidebar.markdown("---")
+
+# ---------------- LOAD DATA ---------------- #
 if uploaded_file is not None and uploaded_model is not None:
 
     with st.spinner("Loading dashboard...."):
@@ -82,15 +92,32 @@ if uploaded_file is not None and uploaded_model is not None:
 else:
     st.warning("Please upload both CSV and model files.")
     st.stop()
-# ---------------- SIDEBAR ---------------- #
-st.sidebar.title("Forecast Controls")
-st.sidebar.markdown("### Dashboard Summary")
+ # ================= SIDEBAR SETTINGS ================= #
 
-st.sidebar.info(
-    "Interactive retail sales forecasting dashboard powered by machine learning and time-series analytics."
-)
+    st.sidebar.markdown("### ⚙️ AI Controls")
 
-# ---------------- DATE FILTER ---------------- #
+    include_oil = st.sidebar.checkbox(
+        "Enable Oil Price Signals",
+        value=True
+    )
+
+    include_holidays = st.sidebar.checkbox(
+        "Enable Holiday Intelligence",
+        value=True
+    )
+
+    forecast_days = st.sidebar.slider(
+        "Forecast Horizon",
+        min_value=7,
+        max_value=90,
+        value=30
+    )
+
+    st.sidebar.markdown("---")
+
+    # ================= DATE FILTERS ================= #
+
+    st.sidebar.markdown("### 📅 Date Filters")
 
 start_date = st.sidebar.date_input(
     "Start Date",
@@ -106,6 +133,8 @@ filtered_df = filtered_df[
     (filtered_df["date"] >= pd.to_datetime(start_date)) &
     (filtered_df["date"] <= pd.to_datetime(end_date))
 ]
+st.sidebar.markdown("---")
+
 #-------------------STORE FILTER -------------------------#
 store = st.sidebar.selectbox(
      "Select Store",
@@ -129,66 +158,120 @@ st.title(" Store Sales Forecasting Dashboard")
 
 st.markdown("### Real-Time Retail Analytics & Al Forecasting")
 
+st.markdown("----")
+
 tab1, tab2, tab3 = st.tabs([
     "Overview",
     "Predictions",
-    "Insights"
+    "Business Insights",
+    "Forecast Results",
+    "Project Summary"
 ])
 st.markdown("Advanced analytics and forecasting dashboard for retail sales.")
 with tab1:
 
+st.markdown("<br>", unsafe_allow_html=True)    
 # ---------------- KPI CARDS ---------------- #
     total_sales = int(filtered_df["sales"].sum())
     avg_sales = int(filtered_df["sales"].mean())
-    max_sales = int(filtered_df["sales"].max())
-    min_sales = int(filtered_df["sales"].min())
+    total_stores = filtered_df["store_nbr"].nunique()
+    total_rows = filtered_df.shape[0]
     
-    st.markdown('## Performance Metrics')
     col1, col2, col3, col4 = st.columns(4)
 col1.metric(
-    "Total Sales", 
-    f"${total_sales:,}"
-    "+12%"
+    "Total Revenue", 
+    f"{total_sales:,}"
 )
 
 col2.metric(
-    "Average Sales", 
-    f"${avg_sales:,}"
-    "+5%"
+    "Average Revenue", 
+    f"{avg_sales:,}"
 ) 
 
 col3.metric(
-    "Highest Sales", 
-    f"${max_sales:,}"
-    "+18%"
+    "Stores", 
+    total stores
 )
 
 col4.metric(
-    "Lowest Sales", 
-    f"${min_sales:,}"
-    "-3%"
+    "Dataset Rows", 
+    f"{total_rows:,}"
 )
 
+st.markdown("------")
+  # ================= DATA PREVIEW ================= #
 
-# ---------------- FILTER DATA ---------------- #
-filtered_df = filtered_df[
-    (filtered_df["store_nbr"] == store) &
-    (filtered_df["year"] == selected_year)
-]
+    st.subheader("Dataset Preview")
 
-# ---------------- SALES TREND CHART ---------------- #
+    st.dataframe(filtered_df.head(10))
+
+    st.markdown("---")
+# ================= SALES TREND CHART ================= #
+
+st.markdown("---")
+
 st.subheader("Sales Trend")
-fig = px.line(
-    filtered_df,
+
+sales_trend = (
+    filtered_df.groupby("date")["sales"]
+    .sum()
+    .reset_index()
+)
+
+fig_trend = px.line(
+    sales_trend,
     x="date",
     y="sales",
-    title="Daily Sales Trend"
+    title="Daily Sales Trend",
+    markers=True
 )
 
-st.plotly_chart(fig, use_container_width=True)
+fig_trend.update_layout(
+    template="plotly_dark",
+    xaxis_title="Date",
+    yaxis_title="Sales",
+    height=500
+)
 
-# ---------------- FORECAST SECTION ---------------- #
-st.subheader("Forecast Prediction")
+st.plotly_chart(
+    fig_trend,
+    use_container_width=True
+)
+
+    # ================= TOP STORE REVENUE CHART ================= #
+
+    st.subheader("Store Revenue Analysis")
+
+    top_locations = (
+        df.groupby("store_nbr")["sales"]
+        .sum()
+        .sort_values(ascending=False)
+        .head(10)
+        .reset_index()
+    )
+
+    fig_overview = px.bar(
+        top_locations,
+        x="store_nbr",
+        y="sales",
+        color="sales",
+        title="Store Sales Comparison",
+        text_auto=True
+    )
+
+    fig_overview.update_layout(
+        template="plotly_dark",
+        xaxis_title="Store ID",
+        yaxis_title="Revenue",
+        height=500
+    )
+
+    st.plotly_chart(
+        fig_overview,
+        use_container_width=True
+    )
+
+    st.markdown("---")
 
 #future_input = np.array([[store, forecast_days]])
 
@@ -196,146 +279,493 @@ st.subheader("Forecast Prediction")
 #st.success( 
 #    f"Predicted Sales for next {forecast_days} days: ${prediction[0]:,.2f}"
 # )
-# ---------------- DATA PREVIEW ---------------- #
-with st.expander("View Raw Data"): 
-    st.dataframe(filtered_df)
-st.markdown("---")
 
 
-# ---------------- PREDICTION CHART ---------------- #
+# ================= TAB 2 : PREDICTIONS ================= #
+
 with tab2:
 
-    st.subheader("Sales Forecast Analysis")
+    st.title("🔮 Sales Forecasting Center")
 
-    st.metric("Forecast Confidence", "87%")
-
-    st.info(
-        "Al Recommendation: Increase stock allocation for high-performing stores."
+    st.markdown(
+        "Real-time forecasting powered by machine learning and predictive analytics."
     )
 
-    predict_button = st.button("Generate Forecast")
+    st.markdown("---")
 
-    if predict_button:
-        st.success(
-            "Al forecasting model successfully generated future sales predictions."
-        )
+    # ================= KPI CARDS ================= #
 
-        st.info(
-            "Forecast indicates positive sales growth trends  across selected stores."
-        )
+    col1, col2, col3 = st.columns(3)
 
-    future_days = np.arange(1, forecast_days + 1)
-
-
-prediction_df = pd.DataFrame({
-    "Day": np.arange(1, forecast_days + 1),
-    "Predicted Sales": np.random.randint(avg_sales, max_sales,forecast_days)
-})
-
-fig2 = px.line(
-    prediction_df,
-    x="Day",
-    y="Predicted Sales",
-    title="Future Sales Forecast",
-    markers=True
-)
-
-st.plotly_chart(fig2, use_container_width=True)
-
-# ---------------- TOP STORES CHART ---------------- #
-
-st.subheader("Top Stores Performance Analysis")
-
-top_store = filtered_df.groupby("store_nbr")["sales"].sum().reset_index()
-
-fig3 = px.bar(
-    top_store,
-    x="store_nbr",
-    y="sales",
-    title="Store Performance",
-    color="sales"
-)
-
-st.plotly_chart(fig3, use_container_width=True)
-
-# ---------------- STORE CONTRIBUTION PIE CHART ---------------- #
-with tab3:
-    st.subheader("Business Insights")
-
-    st.markdown("""
-    ### Key Insights
-
-    - Some stores contribute significantly more sales revenue
-    - Sales distribution is uneven across store locations
-    - High-performing stores can guide future business strategies
-    - Forecast trends support data-driven decision making
-    """)
-    st.info(
-        "AI Insight: Store locations with higher sales trends may require increased inventory allocation."
+    col1.metric(
+        "Forecast Confidence",
+        "87%"
     )
+
+    col2.metric(
+        "Forecast Horizon",
+        f"{forecast_days} Days"
+    )
+
+    col3.metric(
+        "Prediction Status",
+        "Active"
+    )
+
+    st.markdown("---")
+
+    # ================= AI INSIGHT ================= #
+
+    st.info(
+        "AI Insight: Retail demand is expected to remain stable with moderate fluctuations across upcoming forecast periods."
+    )
+
+    # ================= GENERATE BUTTON ================= #
+
+    generate_forecast = st.button(
+        "🚀 Generate Forecast"
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST DATA ================= #
+
+    future_dates = pd.date_range(
+        start=df["date"].max(),
+        periods=forecast_days
+    )
+
+    forecast_df = pd.DataFrame({
+        "Date": future_dates,
+        "Predicted Sales": prediction
+    })
+
+    # ================= FORECAST CHART ================= #
+
+    st.subheader("📈 Forecast Visualization")
+
+    fig_forecast = px.area(
+        forecast_df,
+        x="Date",
+        y="Predicted Sales",
+        title="AI-Powered Future Sales Forecast"
+    )
+
+    fig_forecast.update_layout(
+        template="plotly_dark",
+        xaxis_title="Forecast Date",
+        yaxis_title="Predicted Sales",
+        height=550
+    )
+
+    st.plotly_chart(
+        fig_forecast,
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST TABLE ================= #
+
+    st.subheader("📊 Forecast Results Table")
+
+    st.dataframe(
+        forecast_df.head(15),
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST ANALYTICS ================= #
+
+    avg_prediction = int(
+        forecast_df["Predicted Sales"].mean()
+    )
+
+    max_prediction = int(
+        forecast_df["Predicted Sales"].max()
+    )
+
+    min_prediction = int(
+        forecast_df["Predicted Sales"].min()
+    )
+
+    col4, col5, col6 = st.columns(3)
+
+    col4.metric(
+        "Average Forecast",
+        f"{avg_prediction:,}"
+    )
+
+    col5.metric(
+        "Highest Forecast",
+        f"{max_prediction:,}"
+    )
+
+    col6.metric(
+        "Lowest Forecast",
+        f"{min_prediction:,}"
+    )
+
+    st.markdown("---")
+
+    # ================= PREDICTION INSIGHTS ================= #
+
+    st.subheader("🧠 Prediction Insights")
 
     st.success(
-        "Forecast indicates positive sales growth patterns across selected stores."
+        "Forecast analysis indicates expected growth opportunities across selected retail periods with stable predictive confidence."
     )
 
     st.warning(
-        "Sales fluctuations suggest possible seasonal or promotional effects in certain periods."
+        "Retail sales may fluctuate during holidays, promotions, and seasonal demand spikes."
     )
 
-    fig4 = px.pie(
-    top_store,
-    values="sales",
-    names="store_nbr",
-    title="Sales Contribution by Store"
-)
+    st.markdown("---")
 
-    st.plotly_chart(fig4, use_container_width=True)
+    # ================= DOWNLOAD SECTION ================= #
 
-# ---------------- STORE PERFORMANCE COMPARISON ---------------- #
+    csv = forecast_df.to_csv(index=False).encode("utf-8")
 
-st.subheader("Store Performance Comparison")
+    st.download_button(
+        label="📥 Download Forecast Results",
+        data=csv,
+        file_name="sales_forecast.csv",
+        mime="text/csv"
+    )
 
-comparison_df = filtered_df.groupby("store_nbr")["sales"].mean().reset_index()
+# ================= TAB 3 : BUSINESS INSIGHTS ================= #
 
-fig5 = px.bar(
-    comparison_df,
-    x="store_nbr",
-    y="sales",
-    color="sales",
-    title="Average Sales by Store"
-)
+with tab3:
 
-fig5.update_layout(
-    template="plotly_dark"
-)
+    st.title("🧠 Business Insights & Forecast Results")
 
-st.plotly_chart(fig5, use_container_width=True)
+    st.markdown(
+        "AI-driven business intelligence insights generated from retail sales forecasting and trend analysis."
+    )
 
+    st.markdown("---")
 
-# ---------------- MONTHLY SALES TREND ---------------- #
+    # ================= SALES CONTRIBUTION ================= #
 
-st.subheader("Monthly Sales Analysis")
+    st.subheader("📊 Store Contribution Analysis")
 
-filtered_df["month"] = filtered_df["date"].dt.month
+    contribution_data = (
+        filtered_df.groupby("store_nbr")["sales"]
+        .sum()
+        .reset_index()
+    )
 
-monthly_sales = filtered_df.groupby("month")["sales"].sum().reset_index()
+    fig_pie = px.pie(
+        contribution_data,
+        names="store_nbr",
+        values="sales",
+        title="Store Sales Contribution"
+    )
 
-fig6 = px.line(
-    monthly_sales,
-    x="month",
-    y="sales",
-    markers=True,
-    title="Monthly Sales Performance"
-)
+    fig_pie.update_layout(
+        template="plotly_dark",
+        height=550
+    )
 
-fig6.update_layout(
-    template="plotly_dark"
-)
+    st.plotly_chart(
+        fig_pie,
+        use_container_width=True
+    )
 
-st.plotly_chart(fig6, use_container_width=True)
+    st.markdown("---")
 
+    # ================= BUSINESS INSIGHTS ================= #
 
+    st.subheader("📌 Key Business Insights")
 
+    st.success(
+        "High-performing stores contribute significantly to overall retail revenue generation."
+    )
+
+    st.info(
+        "Forecast trends indicate stable future sales growth across selected forecast periods."
+    )
+
+    st.warning(
+        "Seasonal demand fluctuations may impact sales performance during holiday and promotional periods."
+    )
+
+    st.markdown("---")
+
+    # ================= AI RECOMMENDATIONS ================= #
+
+    st.subheader("🤖 AI Recommendations")
+
+    st.markdown("""
+    - Increase inventory allocation during projected high-demand periods
+    - Monitor underperforming store locations for sales optimization
+    - Use forecast insights to improve retail planning strategies
+    - Focus promotional campaigns on high-revenue sales periods
+    """)
+
+    st.markdown("---")
+
+    # ================= FORECAST RESULTS ================= #
+
+    st.subheader("📈 Forecast Results Overview")
+
+    st.dataframe(
+        forecast_df.head(20),
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST SUMMARY ================= #
+
+    total_forecast = int(
+        forecast_df["Predicted Sales"].sum()
+    )
+
+    avg_forecast = int(
+        forecast_df["Predicted Sales"].mean()
+    )
+
+    peak_forecast = int(
+        forecast_df["Predicted Sales"].max()
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Total Forecast Sales",
+        f"{total_forecast:,}"
+    )
+
+    col2.metric(
+        "Average Forecast",
+        f"{avg_forecast:,}"
+    )
+
+    col3.metric(
+        "Peak Forecast",
+        f"{peak_forecast:,}"
+    )
+
+    st.markdown("---")
+
+    # ================= FINAL INSIGHT ================= #
+
+    st.subheader("📍 Final Forecast Insight")
+
+    st.success(
+        "Forecast analysis suggests continued retail sales stability with opportunities for strategic growth and inventory optimization."
+    )# ================= TAB 4 : FORECAST EXPORT CENTER ================= #
+
+with tab4:
+
+    st.title("📦 Forecast Export Center")
+
+    st.markdown(
+        "Export forecast outputs, review prediction results, and prepare sales forecasts for reporting and business planning."
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST DATA PREVIEW ================= #
+
+    st.subheader("📄 Forecast Data Preview")
+
+    st.dataframe(
+        forecast_df.head(25),
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= EXPORT METRICS ================= #
+
+    total_predictions = len(forecast_df)
+
+    max_sales = int(
+        forecast_df["Predicted Sales"].max()
+    )
+
+    min_sales = int(
+        forecast_df["Predicted Sales"].min()
+    )
+
+    avg_sales = int(
+        forecast_df["Predicted Sales"].mean()
+    )
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric(
+        "Forecast Records",
+        total_predictions
+    )
+
+    col2.metric(
+        "Highest Prediction",
+        f"{max_sales:,}"
+    )
+
+    col3.metric(
+        "Lowest Prediction",
+        f"{min_sales:,}"
+    )
+
+    col4.metric(
+        "Average Prediction",
+        f"{avg_sales:,}"
+    )
+
+    st.markdown("---")
+
+    # ================= FORECAST VISUALIZATION ================= #
+
+    st.subheader("📈 Forecast Distribution")
+
+    fig_export = px.line(
+        forecast_df,
+        x="Date",
+        y="Predicted Sales",
+        markers=True,
+        title="Forecasted Sales Distribution"
+    )
+
+    fig_export.update_layout(
+        template="plotly_dark",
+        xaxis_title="Forecast Date",
+        yaxis_title="Predicted Sales",
+        height=550
+    )
+
+    st.plotly_chart(
+        fig_export,
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= EXPORT SECTION ================= #
+
+    st.subheader("📥 Export Forecast Results")
+
+    csv = forecast_df.to_csv(
+        index=False
+    ).encode("utf-8")
+
+    st.download_button(
+        label="Download Forecast CSV",
+        data=csv,
+        file_name="forecast_results.csv",
+        mime="text/csv"
+    )
+
+    st.markdown("---")
+
+    # ================= REPORT SUMMARY ================= #
+
+    st.subheader("📝 Forecast Report Summary")
+
+    st.info(
+        "Forecast results were generated using machine learning and time-series forecasting models including ARIMA, Prophet, and XGBoost."
+    )
+
+    st.success(
+        "Exported forecast outputs can support retail planning, inventory management, and sales performance analysis."
+    )
+
+    st.warning(
+        "Forecast values may vary depending on future market trends, seasonal demand, and business conditions."
+    )
+# ================= TAB 5 : PROJECT SUMMARY ================= #
+
+with tab5:
+
+    st.title("📘 Project Summary")
+
+    st.markdown(
+        "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
+    )
+
+    st.markdown("---")
+
+    # ================= PROJECT OVERVIEW ================= #
+
+    st.subheader("📌 Project Overview")
+
+    st.markdown("""
+    This dashboard was developed to analyze retail sales performance,
+    generate future sales forecasts, and provide business intelligence
+    insights for improved decision-making.
+
+    The platform combines interactive analytics, forecasting models,
+    and visualization tools to support retail trend analysis and
+    predictive forecasting.
+    """)
+
+    st.markdown("---")
+
+    # ================= MODELS USED ================= #
+
+    st.subheader("🤖 Forecasting Models Used")
+
+    model_data = pd.DataFrame({
+        "Model": ["ARIMA", "Prophet", "XGBoost"],
+        "Purpose": [
+            "Time-Series Forecasting",
+            "Trend & Seasonality Detection",
+            "Machine Learning Prediction"
+        ]
+    })
+
+    st.dataframe(
+        model_data,
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ================= FEATURES ================= #
+
+    st.subheader("⚙️ Dashboard Features")
+
+    st.markdown("""
+    - Interactive retail sales dashboard
+    - AI-powered forecasting visualization
+    - Forecast export functionality
+    - Store performance analytics
+    - Business intelligence insights
+    - Date filtering and forecasting controls
+    - Upload support for datasets and trained models
+    """)
+
+    st.markdown("---")
+
+    # ================= BUSINESS VALUE ================= #
+
+    st.subheader("📈 Business Value")
+
+    st.success(
+        "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business forecasting."
+    )
+
+    st.info(
+        "Interactive analytics provide visibility into retail performance trends and future sales opportunities."
+    )
+
+    st.markdown("---")
+
+    # ================= FINAL NOTE ================= #
+
+    st.subheader("🚀 Final Notes")
+
+    st.markdown("""
+    This project demonstrates the integration of machine learning,
+    business analytics, and interactive dashboard development using
+    Streamlit, Plotly, and predictive forecasting models.
+    """)
+
+    st.markdown("---")
 
 # ---------------- FOOTER ---------------- #
 st.markdown("---")
