@@ -189,7 +189,7 @@ col2.metric(
 
 col3.metric(
     "Stores", 
-    total stores
+    f"{total_stores:,}"
 )
 
 col4.metric(
