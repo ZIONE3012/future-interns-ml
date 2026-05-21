@@ -13,7 +13,18 @@ st.set_page_config(
 )
 
 # ---------------- LOAD DATA ---------------- #
-df = pd.read_csv("./sample_train.csv")
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+
+if uploaded_file is not None:
+    with st.spinner("Loading dashboard...."):
+        df = pd.read_csv(uploaded_file)
+
+    st.success("Dataset uploaded successfully!")
+    df['date'] = pd.to_datetime(df['date'])
+    filtered_df = df.copy()
+    filtered_df["year"] = pd.to_datetime(filtered_df['date']).dt.year
+else:
+    st.stop()
 # ---------------- LOAD MODEL ---------------- #
 model = pickle.load(open("model.pkl", "rb"))
 # ---------------- SIDEBAR ---------------- #
@@ -21,7 +32,7 @@ st.sidebar.title("Forecast Controls")
 
 store = st.sidebar.selectbox(
      "Select Store",
-      df["store_nbr"].unique()
+     filtered_df["store_nbr"].unique()
 )
 
 forecast_days = st.sidebar.slider(
@@ -31,11 +42,9 @@ forecast_days = st.sidebar.slider(
      value=30
 )
 
-df["year"] = pd.to_datetime(df["date"]).dt.year
-
 selected_year = st.sidebar.selectbox(
     "Select Year",
-    df["year"].unique()
+    filtered_df["year"].unique()
 )
 
 # ---------------- HEADER ---------------- #
@@ -52,12 +61,12 @@ st.markdown("Advanced analytics and forecasting dashboard for retail sales.")
 with tab1:
 
 # ---------------- KPI CARDS ---------------- #
-    total_sales = int(df["sales"].sum())
-    avg_sales = int(df["sales"].mean())
-    max_sales = int(df["sales"].max())
-
-min_sales = int(df["sales"].min())
-col1, col2, col3, col4 = st.columns(4)
+    total_sales = int(filtered_df["sales"].sum())
+    avg_sales = int(filtered_df["sales"].mean())
+    max_sales = int(filtered_df["sales"].max())
+    min_sales = int(filtered_df["sales"].min())
+    
+    col1, col2, col3, col4 = st.columns(4)
 col1.metric(
     "Total Sales", 
     f"${total_sales:,}"
@@ -84,9 +93,9 @@ col4.metric(
 
 
 # ---------------- FILTER DATA ---------------- #
-filtered_df = df[
-    (df["store_nbr"] == store) &
-    (df["year"] == selected_year)
+filtered_df = filtered_df[
+    (filtered_df["store_nbr"] == store) &
+    (filtered_df["year"] == selected_year)
 ]
 
 # ---------------- SALES TREND CHART ---------------- #
@@ -160,7 +169,7 @@ st.plotly_chart(fig2, use_container_width=True)
 
 st.subheader("Top Performing Stores")
 
-top_store = df.groupby("store_nbr")["sales"].sum().reset_index()
+top_store = filtered_df.groupby("store_nbr")["sales"].sum().reset_index()
 
 fig3 = px.bar(
     top_store,
@@ -189,7 +198,7 @@ st.plotly_chart(fig4, use_container_width=True)
 
 st.subheader("Store Comparison")
 
-comparison_df = df.groupby("store_nbr")["sales"].mean().reset_index()
+comparison_df = filtered_df.groupby("store_nbr")["sales"].mean().reset_index()
 
 fig5 = px.bar(
     comparison_df,
@@ -210,11 +219,9 @@ st.plotly_chart(fig5, use_container_width=True)
 
 st.subheader("Monthly Sales Trend")
 
-df["date"] = pd.to_datetime(df["date"])
+filtered_df["month"] = filtered_df["date"].dt.month
 
-df["month"] = df["date"].dt.month
-
-monthly_sales = df.groupby("month")["sales"].sum().reset_index()
+monthly_sales = filtered_df.groupby("month")["sales"].sum().reset_index()
 
 fig6 = px.line(
     monthly_sales,
