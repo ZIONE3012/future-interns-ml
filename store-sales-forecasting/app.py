@@ -45,20 +45,43 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------- LOAD DATA ---------------- #
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+uploaded_file = st.file_uploader(
+    "Upload your CSV file",
+    type=["csv"]
+)
 
-if uploaded_file is not None:
+uploaded_model = st.file_uploader(
+    "Upload your trained model",
+    type=["pkl"]
+)
+
+if uploaded_file is not None and uploaded_model is not None:
+
     with st.spinner("Loading dashboard...."):
+
+        # Load dataset
         df = pd.read_csv(uploaded_file)
 
-    st.success("Dataset uploaded successfully!")
-    df['date'] = pd.to_datetime(df['date'])
-    filtered_df = df.copy()
-    filtered_df["year"] = pd.to_datetime(filtered_df['date']).dt.year
+        # Load trained model
+        model = pickle.load(uploaded_model)
+
+        # Convert date column
+        df["date"] = pd.to_datetime(df["date"])
+
+        # Create filtered dataframe
+        filtered_df = df.copy()
+
+        # Create year column
+        filtered_df["year"] = filtered_df["date"].dt.year
+
+        # Create month column
+        filtered_df["month"] = filtered_df["date"].dt.month
+
+        st.success("Dataset and model uploaded successfully!")
+
 else:
+    st.warning("Please upload both CSV and model files.")
     st.stop()
-# ---------------- LOAD MODEL ---------------- #
-model = pickle.load(open("model.pkl", "rb"))
 # ---------------- SIDEBAR ---------------- #
 st.sidebar.title("Forecast Controls")
 st.sidebar.markdown("### Dashboard Summary")
