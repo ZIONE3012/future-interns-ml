@@ -563,7 +563,7 @@ if uploaded_file is not None:
        st.title("📘 Project Summary")
 
        st.markdown(
-         "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
+          "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
     )
 
        st.markdown("---")
