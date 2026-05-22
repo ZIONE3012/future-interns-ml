@@ -503,7 +503,7 @@ if uploaded_file is not None:
         - Focus promotional campaigns on high-revenue sales periods
     """)
 
-        st.markdown("---")
+       st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
 
@@ -518,21 +518,21 @@ if uploaded_file is not None:
 
     # ================= FORECAST SUMMARY ================= #
 
-     total_forecast = int(
-        forecast_df["Predicted Sales"].sum()
+       total_forecast = int(
+         forecast_df["Predicted Sales"].sum()
     )
 
-     avg_forecast = int(
-        forecast_df["Predicted Sales"].mean()
+       avg_forecast = int(
+         forecast_df["Predicted Sales"].mean()
     )
 
-     peak_forecast = int(
-        forecast_df["Predicted Sales"].max()
+       peak_forecast = int(
+          forecast_df["Predicted Sales"].max()
     )
 
-     col1, col2, col3 = st.columns(3)
+      col1, col2, col3 = st.columns(3)
 
-     col1.metric(
+      col1.metric(
         "Total Forecast Sales",
         f"{total_forecast:,}"
     )
