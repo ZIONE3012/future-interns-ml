@@ -447,67 +447,67 @@ with tab3:
 
     # ================= SALES CONTRIBUTION ================= #
 
-    st.subheader("📊 Store Contribution Analysis")
+     st.subheader("📊 Store Contribution Analysis")
 
-    contribution_data = (
-        filtered_df.groupby("store_nbr")["sales"]
+     contribution_data = (
+         filtered_df.groupby("store_nbr")["sales"]
         .sum()
         .reset_index()
     )
 
-    fig_pie = px.pie(
+     fig_pie = px.pie(
         contribution_data,
         names="store_nbr",
         values="sales",
         title="Store Sales Contribution"
     )
 
-    fig_pie.update_layout(
+     fig_pie.update_layout(
         template="plotly_dark",
         height=550
     )
 
-    st.plotly_chart(
+     st.plotly_chart(
         fig_pie,
         use_container_width=True
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= BUSINESS INSIGHTS ================= #
 
-    st.subheader("📌 Key Business Insights")
+     st.subheader("📌 Key Business Insights")
 
-    st.success(
+     st.success(
         "High-performing stores contribute significantly to overall retail revenue generation."
     )
 
-    st.info(
+     st.info(
         "Forecast trends indicate stable future sales growth across selected forecast periods."
     )
 
-    st.warning(
+     st.warning(
         "Seasonal demand fluctuations may impact sales performance during holiday and promotional periods."
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= AI RECOMMENDATIONS ================= #
 
-    st.subheader("🤖 AI Recommendations")
+     st.subheader("🤖 AI Recommendations")
 
-    st.markdown("""
+     st.markdown("""
     - Increase inventory allocation during projected high-demand periods
     - Monitor underperforming store locations for sales optimization
     - Use forecast insights to improve retail planning strategies
     - Focus promotional campaigns on high-revenue sales periods
     """)
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
 
-    st.subheader("📈 Forecast Results Overview")
+     st.subheader("📈 Forecast Results Overview")
 
     st.dataframe(
         forecast_df.head(20),
