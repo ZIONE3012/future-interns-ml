@@ -616,7 +616,7 @@ if uploaded_file is not None:
           - Business intelligence insights
           - Date filtering and forecasting controls
           - Upload support for datasets and trained models
-          """)
+           """)
 
          st.markdown("---")
 
