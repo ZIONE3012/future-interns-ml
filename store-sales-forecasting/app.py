@@ -270,7 +270,7 @@ if uploaded_file is not None:
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
-    with tab2:
+   with tab2:
 
         st.title("🔮 Sales Forecasting Center")
 
@@ -435,7 +435,7 @@ if uploaded_file is not None:
 
 # ================= TAB 3 : BUSINESS INSIGHTS ================= #
 
-with tab3:
+  with tab3:
 
      st.title("🧠 Business Insights & Forecast Results")
 
@@ -558,7 +558,7 @@ with tab3:
     )
 # ================= TAB 4: PROJECT SUMMARY ================= #
 
-with tab4:
+  with tab4:
 
      st.title("📘 Project Summary")
 
