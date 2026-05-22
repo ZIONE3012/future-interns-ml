@@ -570,23 +570,23 @@ if uploaded_file is not None:
 
     # ================= PROJECT OVERVIEW ================= #
 
-       st.subheader("📌 Project Overview")
+        st.subheader("📌 Project Overview")
 
-       st.markdown("""
-           This dashboard was developed to analyze retail sales performance,
-          generate future sales forecasts, and provide business intelligence
-          insights for improved decision-making.
+        st.markdown("""
+            This dashboard was developed to analyze retail sales performance,
+            generate future sales forecasts, and provide business intelligence
+            insights for improved decision-making.
 
-          The platform combines interactive analytics, forecasting models,
-          and visualization tools to support retail trend analysis and
-          predictive forecasting.
+            The platform combines interactive analytics, forecasting models,
+            and visualization tools to support retail trend analysis and
+            predictive forecasting.
     """)
 
-       st.markdown("---")
+        st.markdown("---")
 
     # ================= MODELS USED ================= #
 
-       st.subheader("🤖 Forecasting Models Used")
+        st.subheader("🤖 Forecasting Models Used")
 
      model_data = pd.DataFrame({
         "Model": ["ARIMA", "Prophet", "XGBoost"],
