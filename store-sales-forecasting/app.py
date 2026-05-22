@@ -551,42 +551,42 @@ if uploaded_file is not None:
 
     # ================= FINAL INSIGHT ================= #
 
-     st.subheader("📍 Final Forecast Insight")
+       st.subheader("📍 Final Forecast Insight")
 
-     st.success(
-        "Forecast analysis suggests continued retail sales stability with opportunities for strategic growth and inventory optimization."
+       st.success(
+         "Forecast analysis suggests continued retail sales stability with opportunities for strategic growth and inventory optimization."
     )
 # ================= TAB 4: PROJECT SUMMARY ================= #
 
   with tab4:
 
-     st.title("📘 Project Summary")
+       st.title("📘 Project Summary")
 
-     st.markdown(
-        "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
+       st.markdown(
+         "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= PROJECT OVERVIEW ================= #
 
-     st.subheader("📌 Project Overview")
+       st.subheader("📌 Project Overview")
 
-     st.markdown("""
-         This dashboard was developed to analyze retail sales performance,
-        generate future sales forecasts, and provide business intelligence
-        insights for improved decision-making.
+       st.markdown("""
+           This dashboard was developed to analyze retail sales performance,
+          generate future sales forecasts, and provide business intelligence
+          insights for improved decision-making.
 
-        The platform combines interactive analytics, forecasting models,
-        and visualization tools to support retail trend analysis and
-        predictive forecasting.
+          The platform combines interactive analytics, forecasting models,
+          and visualization tools to support retail trend analysis and
+          predictive forecasting.
     """)
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= MODELS USED ================= #
 
-     st.subheader("🤖 Forecasting Models Used")
+       st.subheader("🤖 Forecasting Models Used")
 
      model_data = pd.DataFrame({
         "Model": ["ARIMA", "Prophet", "XGBoost"],
