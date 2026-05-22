@@ -237,32 +237,32 @@ st.plotly_chart(
 )
 
 # ================= TOP STORE REVENUE CHART ================= #
-
+st.markdown("----")
 st.subheader("Store Revenue Analysis")
  
-    top_locations = (
-        df.groupby("store_nbr")["sales"]
-        .sum()
-        .sort_values(ascending=False)
-        .head(10)
-        .reset_index()
-    )
+top_locations = (
+     df.groupby("store_nbr")["sales"]
+     .sum()
+     .sort_values(ascending=False)
+     .head(10)
+     .reset_index()
+)
 
-    fig_overview = px.bar(
-        top_locations,
-        x="store_nbr",
-        y="sales",
-        color="sales",
-        title="Store Sales Comparison",
-        text_auto=True
-    )
+fig_overview = px.bar(
+     top_locations,
+     x="store_nbr",
+     y="sales",
+     color="sales",
+     title="Store Sales Comparison",
+     text_auto=True
+)
 
-    fig_overview.update_layout(
-        template="plotly_dark",
-        xaxis_title="Store ID",
-        yaxis_title="Revenue",
-        height=500
-    )
+fig_overview.update_layout(
+     template="plotly_dark",
+     xaxis_title="Store ID",
+     yaxis_title="Revenue",
+     height=500
+)
 
     st.plotly_chart(
         fig_overview,
