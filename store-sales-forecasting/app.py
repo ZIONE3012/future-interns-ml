@@ -161,7 +161,7 @@ if uploaded_file is not None:
         "Predictions",
         "Business Insights",
         "Project Summary"
-])
+])       
 
     with tab1:
         st.markdown("<br>", unsafe_allow_html=True)    
@@ -266,50 +266,50 @@ if uploaded_file is not None:
              use_container_width=True
     )
 
-            st.markdown("---")
+        st.markdown("---")
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
 with tab2:
 
-    st.title("🔮 Sales Forecasting Center")
+        st.title("🔮 Sales Forecasting Center")
 
-    st.markdown(
-        "Real-time forecasting powered by machine learning and predictive analytics."
+        st.markdown(
+            "Real-time forecasting powered by machine learning and predictive analytics."
     )
 
-    st.markdown("---")
+        st.markdown("---")
 
     # ================= KPI CARDS ================= #
 
-    col1, col2, col3 = st.columns(3)
+        col1, col2, col3 = st.columns(3)
 
-    col1.metric(
-        "Forecast Confidence",
-        "87%"
+        col1.metric(
+            "Forecast Confidence",
+            "87%"
     )
 
-    col2.metric(
-        "Forecast Horizon",
-        f"{forecast_days} Days"
+        col2.metric(
+            "Forecast Horizon",
+            f"{forecast_days} Days"
     )
 
-    col3.metric(
-        "Prediction Status",
-        "Active"
+        col3.metric(
+            "Prediction Status",
+            "Active"
     )
 
-    st.markdown("---")
+        st.markdown("---")
 
     # ================= AI INSIGHT ================= #
 
-    st.info(
-        "AI Insight: Retail demand is expected to remain stable with moderate fluctuations across upcoming forecast periods."
+        st.info(
+            "AI Insight: Retail demand is expected to remain stable with moderate fluctuations across upcoming forecast periods."
     )
 
     # ================= GENERATE BUTTON ================= #
-    generate_forecast = st.button(
-        "🚀 Generate Forecast"
+        generate_forecast = st.button(
+            "🚀 Generate Forecast"
     )
 
     if generate_forecast:
