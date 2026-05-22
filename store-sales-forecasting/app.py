@@ -329,13 +329,13 @@ with tab2:
                 .values[0]
         )
 
-             future_predictions = []
+            future_predictions = []
 
-             for i in range(forecast_days):
+            for i in range(forecast_days):
                 predicted_value = last_sales * (1 + (i * 0.02))
                 future_predictions.append(predicted_value)
 
-             forecast_df = pd.DataFrame({
+            forecast_df = pd.DataFrame({
                 "Date": future_dates,
                 "Predicted Sales": future_predictions
         })
