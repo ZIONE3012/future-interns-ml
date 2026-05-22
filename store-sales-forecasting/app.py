@@ -312,138 +312,138 @@ with tab2:
             "🚀 Generate Forecast"
     )
 
-    if generate_forecast:
+        if generate_forecast:
 
         # ================= FORECAST DATA ================= #
 
-        future_dates = pd.date_range(
-            start=df["date"].max(),
-            periods=forecast_days
+            future_dates = pd.date_range(
+                start=df["date"].max(),
+                periods=forecast_days
         )
 
         # Generate AI-style future predictions
-        last_sales = (
-            df.groupby("date")["sales"]
-            .sum()
-            .tail(1)
-            .values[0]
+            last_sales = (
+                df.groupby("date")["sales"]
+                .sum()
+                .tail(1)
+                .values[0]
         )
 
-        future_predictions = []
+             future_predictions = []
 
-        for i in range(forecast_days):
-            predicted_value = last_sales * (1 + (i * 0.02))
-            future_predictions.append(predicted_value)
+             for i in range(forecast_days):
+                predicted_value = last_sales * (1 + (i * 0.02))
+                future_predictions.append(predicted_value)
 
-        forecast_df = pd.DataFrame({
-            "Date": future_dates,
-            "Predicted Sales": future_predictions
+             forecast_df = pd.DataFrame({
+                "Date": future_dates,
+                "Predicted Sales": future_predictions
         })
     # ================= FORECAST CHART ================= #
 
-    st.subheader("📈 Forecast Visualization")
+            st.subheader("📈 Forecast Visualization")
 
-    fig_forecast = px.area(
-        forecast_df,
-        x="Date",
-        y="Predicted Sales",
-        title="AI-Powered Future Sales Forecast"
+            fig_forecast = px.area(
+                forecast_df,
+                x="Date",
+                y="Predicted Sales",
+                title="AI-Powered Future Sales Forecast"
     )
 
-    fig_forecast.update_layout(
-        template="plotly_dark",
-        xaxis_title="Forecast Date",
-        yaxis_title="Predicted Sales",
-        height=550
+            fig_forecast.update_layout(
+                template="plotly_dark",
+                xaxis_title="Forecast Date",
+                yaxis_title="Predicted Sales",
+                height=550
     )
 
-    st.plotly_chart(
-        fig_forecast,
-        use_container_width=True
+            st.plotly_chart(
+                fig_forecast,
+                use_container_width=True
     )
 
-    st.markdown("---")
+            st.markdown("---")
 
     # ================= FORECAST TABLE ================= #
 
-    st.subheader("📊 Forecast Results Table")
+            st.subheader("📊 Forecast Results Table")
 
-    st.dataframe(
-        forecast_df.head(15),
-        use_container_width=True
+            st.dataframe(
+                forecast_df.head(15),
+                use_container_width=True
     )
 
-    st.markdown("---")
+            st.markdown("---")
 
     # ================= FORECAST ANALYTICS ================= #
 
-    avg_prediction = int(
-        forecast_df["Predicted Sales"].mean()
+            avg_prediction = int(
+                forecast_df["Predicted Sales"].mean()
     )
 
-    max_prediction = int(
-        forecast_df["Predicted Sales"].max()
+            max_prediction = int(
+                forecast_df["Predicted Sales"].max()
     )
 
-    min_prediction = int(
-        forecast_df["Predicted Sales"].min()
+            min_prediction = int(
+                forecast_df["Predicted Sales"].min()
     )
 
-    col4, col5, col6 = st.columns(3)
+            col4, col5, col6 = st.columns(3)
 
-    col4.metric(
-        "Average Forecast",
-        f"{avg_prediction:,}"
+            col4.metric(
+                "Average Forecast",
+                f"{avg_prediction:,}"
     )
 
-    col5.metric(
-        "Highest Forecast",
-        f"{max_prediction:,}"
+            col5.metric(
+                "Highest Forecast",
+                f"{max_prediction:,}"
     )
 
-    col6.metric(
-        "Lowest Forecast",
-        f"{min_prediction:,}"
+            col6.metric(
+                "Lowest Forecast",
+                f"{min_prediction:,}"
     )
 
-    st.markdown("---")
+            st.markdown("---")
 
     # ================= PREDICTION INSIGHTS ================= #
 
-    st.subheader("🧠 Prediction Insights")
+            st.subheader("🧠 Prediction Insights")
 
-    st.success(
-        "Forecast analysis indicates expected growth opportunities across selected retail periods with stable predictive confidence."
+            st.success(
+                "Forecast analysis indicates expected growth opportunities across selected retail periods with stable predictive confidence."
     )
 
-    st.warning(
-        "Retail sales may fluctuate during holidays, promotions, and seasonal demand spikes."
+            st.warning(
+                "Retail sales may fluctuate during holidays, promotions, and seasonal demand spikes."
     )
 
-    st.markdown("---")
+            st.markdown("---")
 
     # ================= DOWNLOAD SECTION ================= #
 
-    csv = forecast_df.to_csv(index=False).encode("utf-8")
+            csv = forecast_df.to_csv(index=False).encode("utf-8")
 
-    st.download_button(
-        label="📥 Download Forecast Results",
-        data=csv,
-        file_name="sales_forecast.csv",
-        mime="text/csv"
+            st.download_button(
+                label="📥 Download Forecast Results",
+                data=csv,
+                file_name="sales_forecast.csv",
+                mime="text/csv"
     )
 
 # ================= TAB 3 : BUSINESS INSIGHTS ================= #
 
 with tab3:
 
-    st.title("🧠 Business Insights & Forecast Results")
+     st.title("🧠 Business Insights & Forecast Results")
 
-    st.markdown(
+     st.markdown(
         "AI-driven business intelligence insights generated from retail sales forecasting and trend analysis."
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= SALES CONTRIBUTION ================= #
 
