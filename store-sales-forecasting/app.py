@@ -311,39 +311,37 @@ with tab2:
     )
 
     # ================= GENERATE BUTTON ================= #
-
-   generate_forecast = st.button(
-    "🚀 Generate Forecast"
-)
-
-if generate_forecast:
-
-    # ================= FORECAST DATA ================= #
-
-    future_dates = pd.date_range(
-        start=df["date"].max(),
-        periods=forecast_days
+         generate_forecast = st.button(
+        "🚀 Generate Forecast"
     )
 
-    # Generate AI-style future predictions
-    last_sales = (
-        df.groupby("date")["sales"]
-        .sum()
-        .tail(1)
-        .values[0]
-    )
+    if generate_forecast:
 
-    future_predictions = []
+        # ================= FORECAST DATA ================= #
 
-    for i in range(forecast_days):
-        predicted_value = last_sales * (1 + (i * 0.02))
-        future_predictions.append(predicted_value)
+        future_dates = pd.date_range(
+            start=df["date"].max(),
+            periods=forecast_days
+        )
 
-    forecast_df = pd.DataFrame({
-        "Date": future_dates,
-        "Predicted Sales": future_predictions
-    })
+        # Generate AI-style future predictions
+        last_sales = (
+            df.groupby("date")["sales"]
+            .sum()
+            .tail(1)
+            .values[0]
+        )
 
+        future_predictions = []
+
+        for i in range(forecast_days):
+            predicted_value = last_sales * (1 + (i * 0.02))
+            future_predictions.append(predicted_value)
+
+        forecast_df = pd.DataFrame({
+            "Date": future_dates,
+            "Predicted Sales": future_predictions
+        })
     # ================= FORECAST CHART ================= #
 
     st.subheader("📈 Forecast Visualization")
