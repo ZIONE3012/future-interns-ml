@@ -638,17 +638,17 @@ if uploaded_file is not None:
 
     st.subheader("🚀 Final Notes")
 
-         st.markdown("""
-          This project demonstrates the integration of machine learning,
-          business analytics, and interactive dashboard development using
-          Streamlit, Plotly, and predictive forecasting models.
+    st.markdown("""
+        This project demonstrates the integration of machine learning,
+        business analytics, and interactive dashboard development using
+        Streamlit, Plotly, and predictive forecasting models.
     """)
 
-         st.markdown("---")
+    st.markdown("---")
 
 # ---------------- FOOTER ---------------- #
-     st.markdown("---")
-     st.caption(" Developed by Nsisong •  Retail Sales Forecasting & Business Analytics Dashboard")
-     st.caption(
+    st.markdown("---")
+    st.caption(" Developed by Nsisong •  Retail Sales Forecasting & Business Analytics Dashboard")
+    st.caption(
         "Built with Streamlit • ARIMA • Prophet • • XGBoost • • Plotly • Machine Learning"
 )
