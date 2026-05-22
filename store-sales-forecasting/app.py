@@ -311,7 +311,7 @@ with tab2:
     )
 
     # ================= GENERATE BUTTON ================= #
-         generate_forecast = st.button(
+    generate_forecast = st.button(
         "🚀 Generate Forecast"
     )
 
