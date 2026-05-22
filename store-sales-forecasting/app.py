@@ -327,7 +327,7 @@ with tab2:
 
     forecast_df = pd.DataFrame({
         "Date": future_dates,
-        "Predicted Sales": prediction
+        "Predicted Sales": future_predictions
     })
 
     # ================= FORECAST CHART ================= #
