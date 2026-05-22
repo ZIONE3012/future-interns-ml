@@ -88,9 +88,6 @@ with st.spinner("Loading dashboard...."):
 
         st.success("Dataset and model uploaded successfully!")
 
-else:
-    st.warning("Please upload both CSV and model files.")
-    st.stop()
  # ================= SIDEBAR SETTINGS ================= #
 
     st.sidebar.markdown("### ⚙️ AI Controls")
