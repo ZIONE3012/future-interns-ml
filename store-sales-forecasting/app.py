@@ -582,13 +582,13 @@ with tab4:
         predictive forecasting.
     """)
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= MODELS USED ================= #
 
-    st.subheader("🤖 Forecasting Models Used")
+     st.subheader("🤖 Forecasting Models Used")
 
-    model_data = pd.DataFrame({
+     model_data = pd.DataFrame({
         "Model": ["ARIMA", "Prophet", "XGBoost"],
         "Purpose": [
             "Time-Series Forecasting",
@@ -597,58 +597,58 @@ with tab4:
         ]
     })
 
-    st.dataframe(
+     st.dataframe(
         model_data,
         use_container_width=True
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= FEATURES ================= #
 
-    st.subheader("⚙️ Dashboard Features")
+     st.subheader("⚙️ Dashboard Features")
 
-    st.markdown("""
-    - Interactive retail sales dashboard
-    - AI-powered forecasting visualization
-    - Forecast export functionality
-    - Store performance analytics
-    - Business intelligence insights
-    - Date filtering and forecasting controls
-    - Upload support for datasets and trained models
+     st.markdown("""
+      - Interactive retail sales dashboard
+      - AI-powered forecasting visualization
+      - Forecast export functionality
+      - Store performance analytics
+      - Business intelligence insights
+      - Date filtering and forecasting controls
+      - Upload support for datasets and trained models
     """)
 
-    st.markdown("---")
+      st.markdown("---")
 
     # ================= BUSINESS VALUE ================= #
 
-    st.subheader("📈 Business Value")
+      st.subheader("📈 Business Value")
 
-    st.success(
-        "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business forecasting."
+      st.success(
+          "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business forecasting."
     )
 
-    st.info(
+      st.info(
         "Interactive analytics provide visibility into retail performance trends and future sales opportunities."
     )
 
-    st.markdown("---")
+      st.markdown("---")
 
     # ================= FINAL NOTE ================= #
 
-    st.subheader("🚀 Final Notes")
+      st.subheader("🚀 Final Notes")
 
-    st.markdown("""
-    This project demonstrates the integration of machine learning,
-    business analytics, and interactive dashboard development using
-    Streamlit, Plotly, and predictive forecasting models.
+      st.markdown("""
+       This project demonstrates the integration of machine learning,
+       business analytics, and interactive dashboard development using
+       Streamlit, Plotly, and predictive forecasting models.
     """)
 
-    st.markdown("---")
+      st.markdown("---")
 
 # ---------------- FOOTER ---------------- #
-st.markdown("---")
-st.caption(" Developed by Nsisong •  Retail Sales Forecasting & Business Analytics Dashboard")
-st.caption(
-    "Built with Streamlit • ARIMA • Prophet • • XGBoost • • Plotly • Machine Learning"
+      st.markdown("---")
+      st.caption(" Developed by Nsisong •  Retail Sales Forecasting & Business Analytics Dashboard")
+      st.caption(
+        "Built with Streamlit • ARIMA • Prophet • • XGBoost • • Plotly • Machine Learning"
 )
