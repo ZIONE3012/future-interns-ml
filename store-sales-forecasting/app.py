@@ -472,49 +472,49 @@ if uploaded_file is not None:
          use_container_width=True
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= BUSINESS INSIGHTS ================= #
 
-     st.subheader("📌 Key Business Insights")
+       st.subheader("📌 Key Business Insights")
 
-     st.success(
-        "High-performing stores contribute significantly to overall retail revenue generation."
+       st.success(
+          "High-performing stores contribute significantly to overall retail revenue generation."
     )
 
-     st.info(
-        "Forecast trends indicate stable future sales growth across selected forecast periods."
+       st.info(
+          "Forecast trends indicate stable future sales growth across selected forecast periods."
     )
 
-     st.warning(
-        "Seasonal demand fluctuations may impact sales performance during holiday and promotional periods."
+       st.warning(
+          "Seasonal demand fluctuations may impact sales performance during holiday and promotional periods."
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= AI RECOMMENDATIONS ================= #
 
-     st.subheader("🤖 AI Recommendations")
+       st.subheader("🤖 AI Recommendations")
 
-     st.markdown("""
-    - Increase inventory allocation during projected high-demand periods
-    - Monitor underperforming store locations for sales optimization
-    - Use forecast insights to improve retail planning strategies
-    - Focus promotional campaigns on high-revenue sales periods
+       st.markdown("""
+        - Increase inventory allocation during projected high-demand periods
+        - Monitor underperforming store locations for sales optimization
+        - Use forecast insights to improve retail planning strategies
+        - Focus promotional campaigns on high-revenue sales periods
     """)
 
-     st.markdown("---")
+        st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
 
-     st.subheader("📈 Forecast Results Overview")
+       st.subheader("📈 Forecast Results Overview")
 
-     st.dataframe(
-        forecast_df.head(20),
-        use_container_width=True
+       st.dataframe(
+          forecast_df.head(20),
+          use_container_width=True
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= FORECAST SUMMARY ================= #
 
