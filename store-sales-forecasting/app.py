@@ -558,15 +558,15 @@ if uploaded_file is not None:
     )
 # ================= TAB 4: PROJECT SUMMARY ================= #
 
-  with tab4:
+     with tab4:
 
-       st.title("📘 Project Summary")
+         st.title("📘 Project Summary")
 
-       st.markdown(
-          "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
+         st.markdown(
+            "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
     )
 
-       st.markdown("---")
+         st.markdown("---")
 
     # ================= PROJECT OVERVIEW ================= #
 
