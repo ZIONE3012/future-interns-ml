@@ -266,7 +266,7 @@ if uploaded_file is not None:
              use_container_width=True
     )
 
-       st.markdown("---")
+        st.markdown("----")
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
