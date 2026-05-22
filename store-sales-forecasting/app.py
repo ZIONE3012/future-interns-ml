@@ -160,11 +160,10 @@ st.markdown("### Real-Time Retail Analytics & Al Forecasting")
 
 st.markdown("----")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
     "Overview",
     "Predictions",
     "Business Insights",
-    "Forecast Results",
     "Project Summary"
 ])
 
@@ -271,14 +270,6 @@ st.subheader("Store Revenue Analysis")
     )
 
     st.markdown("---")
-
-#future_input = np.array([[store, forecast_days]])
-
-#prediction = model.predict(future_input)
-#st.success( 
-#    f"Predicted Sales for next {forecast_days} days: ${prediction[0]:,.2f}"
-# )
-
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
@@ -555,130 +546,10 @@ with tab3:
 
     st.success(
         "Forecast analysis suggests continued retail sales stability with opportunities for strategic growth and inventory optimization."
-    )# ================= TAB 4 : FORECAST EXPORT CENTER ================= #
+    )
+# ================= TAB 4: PROJECT SUMMARY ================= #
 
 with tab4:
-
-    st.title("📦 Forecast Export Center")
-
-    st.markdown(
-        "Export forecast outputs, review prediction results, and prepare sales forecasts for reporting and business planning."
-    )
-
-    st.markdown("---")
-
-    # ================= FORECAST DATA PREVIEW ================= #
-
-    st.subheader("📄 Forecast Data Preview")
-
-    st.dataframe(
-        forecast_df.head(25),
-        use_container_width=True
-    )
-
-    st.markdown("---")
-
-    # ================= EXPORT METRICS ================= #
-
-    total_predictions = len(forecast_df)
-
-    max_sales = int(
-        forecast_df["Predicted Sales"].max()
-    )
-
-    min_sales = int(
-        forecast_df["Predicted Sales"].min()
-    )
-
-    avg_sales = int(
-        forecast_df["Predicted Sales"].mean()
-    )
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    col1.metric(
-        "Forecast Records",
-        total_predictions
-    )
-
-    col2.metric(
-        "Highest Prediction",
-        f"{max_sales:,}"
-    )
-
-    col3.metric(
-        "Lowest Prediction",
-        f"{min_sales:,}"
-    )
-
-    col4.metric(
-        "Average Prediction",
-        f"{avg_sales:,}"
-    )
-
-    st.markdown("---")
-
-    # ================= FORECAST VISUALIZATION ================= #
-
-    st.subheader("📈 Forecast Distribution")
-
-    fig_export = px.line(
-        forecast_df,
-        x="Date",
-        y="Predicted Sales",
-        markers=True,
-        title="Forecasted Sales Distribution"
-    )
-
-    fig_export.update_layout(
-        template="plotly_dark",
-        xaxis_title="Forecast Date",
-        yaxis_title="Predicted Sales",
-        height=550
-    )
-
-    st.plotly_chart(
-        fig_export,
-        use_container_width=True
-    )
-
-    st.markdown("---")
-
-    # ================= EXPORT SECTION ================= #
-
-    st.subheader("📥 Export Forecast Results")
-
-    csv = forecast_df.to_csv(
-        index=False
-    ).encode("utf-8")
-
-    st.download_button(
-        label="Download Forecast CSV",
-        data=csv,
-        file_name="forecast_results.csv",
-        mime="text/csv"
-    )
-
-    st.markdown("---")
-
-    # ================= REPORT SUMMARY ================= #
-
-    st.subheader("📝 Forecast Report Summary")
-
-    st.info(
-        "Forecast results were generated using machine learning and time-series forecasting models including ARIMA, Prophet, and XGBoost."
-    )
-
-    st.success(
-        "Exported forecast outputs can support retail planning, inventory management, and sales performance analysis."
-    )
-
-    st.warning(
-        "Forecast values may vary depending on future market trends, seasonal demand, and business conditions."
-    )
-# ================= TAB 5 : PROJECT SUMMARY ================= #
-
-with tab5:
 
     st.title("📘 Project Summary")
 
