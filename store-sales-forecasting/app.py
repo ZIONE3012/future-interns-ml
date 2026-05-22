@@ -150,122 +150,123 @@ if uploaded_file is not None:
 )
 
 # ---------------- HEADER ---------------- #
-st.title(" Store Sales Forecasting Dashboard")
+    st.title(" Store Sales Forecasting Dashboard")
 
-st.markdown("#### Real-Time Retail Analytics & Al Forecasting")
+    st.markdown("#### Real-Time Retail Analytics & Al Forecasting")
 
-st.markdown("----")
+    st.markdown("----")
 
-tab1, tab2, tab3, tab4 = st.tabs([
-    "Overview",
-    "Predictions",
-    "Business Insights",
-    "Project Summary"
+    tab1, tab2, tab3, tab4 = st.tabs([
+        "Overview",
+        "Predictions",
+        "Business Insights",
+        "Project Summary"
 ])
 
-with tab1:
-    st.markdown("<br>", unsafe_allow_html=True)    
+    with tab1:
+        st.markdown("<br>", unsafe_allow_html=True)    
 # ---------------- KPI CARDS ---------------- #
-    total_sales = int(filtered_df["sales"].sum())
-    avg_sales = int(filtered_df["sales"].mean())
-    total_stores = filtered_df["store_nbr"].nunique()
-    total_rows = filtered_df.shape[0]
+        total_sales = int(filtered_df["sales"].sum())
+        avg_sales = int(filtered_df["sales"].mean())
+        total_stores = filtered_df["store_nbr"].nunique()
+        total_rows = filtered_df.shape[0]
     
-    col1, col2, col3, col4 = st.columns(4)
-col1.metric(
-    "Total Revenue", 
-    f"{total_sales:,}"
+        col1, col2, col3, col4 = st.columns(4)
+        
+        col1.metric(
+            "Total Revenue", 
+             f"{total_sales:,}"
 )
 
-col2.metric(
-    "Average Revenue", 
-    f"{avg_sales:,}"
+        col2.metric(
+            "Average Revenue", 
+            f"{avg_sales:,}"
 ) 
 
-col3.metric(
-    "Stores", 
-    f"{total_stores:,}"
+        col3.metric(
+            "Stores", 
+            f"{total_stores:,}"
 )
 
-col4.metric(
-    "Dataset Rows", 
-    f"{total_rows:,}"
+        col4.metric(
+            "Dataset Rows", 
+            f"{total_rows:,}"
 )
 
-st.markdown("------")
+        st.markdown("------")
   # ================= DATA PREVIEW ================= #
 
-st.subheader("Dataset Preview")
+        st.subheader("Dataset Preview")
 
-st.dataframe(filtered_df.head(10))
+        st.dataframe(filtered_df.head(10))
 
-st.markdown("---")
+        st.markdown("---")
 # ================= SALES TREND CHART ================= #
 
-st.markdown("---")
+        st.markdown("---")
 
-st.subheader("Sales Trend")
+        st.subheader("Sales Trend")
 
-sales_trend = (
-    filtered_df.groupby("date")["sales"]
-    .sum()
-    .reset_index()
+        sales_trend = (
+            filtered_df.groupby("date")["sales"]
+            .sum()
+            .reset_index()
 )
 
-fig_trend = px.line(
-    sales_trend,
-    x="date",
-    y="sales",
-    title="Daily Sales Trend",
-    markers=True
+        fig_trend = px.line(
+            sales_trend,
+            x="date",
+            y="sales",
+            title="Daily Sales Trend",
+            markers=True
 )
 
-fig_trend.update_layout(
-    template="plotly_dark",
-    xaxis_title="Date",
-    yaxis_title="Sales",
-    height=500
+        fig_trend.update_layout(
+            template="plotly_dark",
+            xaxis_title="Date",
+            yaxis_title="Sales",
+            height=500
 )
 
-st.plotly_chart(
-    fig_trend,
-    use_container_width=True
+        st.plotly_chart(
+            fig_trend,
+            use_container_width=True
 )
 
 # ================= TOP STORE REVENUE CHART ================= #
-st.markdown("----")
-st.subheader("Store Revenue Analysis")
+        st.markdown("----")
+        st.subheader("Store Revenue Analysis")
  
-top_locations = (
-     df.groupby("store_nbr")["sales"]
-     .sum()
-     .sort_values(ascending=False)
-     .head(10)
-     .reset_index()
+        top_locations = (
+            df.groupby("store_nbr")["sales"]
+            .sum()
+            .sort_values(ascending=False)
+            .head(10)
+            .reset_index()
 )
 
-fig_overview = px.bar(
-     top_locations,
-     x="store_nbr",
-     y="sales",
-     color="sales",
-     title="Store Sales Comparison",
-     text_auto=True
+        fig_overview = px.bar(
+            top_locations,
+            x="store_nbr",
+            y="sales",
+            color="sales",
+            title="Store Sales Comparison",
+            text_auto=True
 )
 
-fig_overview.update_layout(
-     template="plotly_dark",
-     xaxis_title="Store ID",
-     yaxis_title="Revenue",
-     height=500
+        fig_overview.update_layout(
+             template="plotly_dark",
+             xaxis_title="Store ID",
+             yaxis_title="Revenue",
+             height=500
 )
 
-st.plotly_chart(
-     fig_overview,
-     use_container_width=True
+        st.plotly_chart(
+             fig_overview,
+             use_container_width=True
     )
 
-st.markdown("---")
+            st.markdown("---")
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
