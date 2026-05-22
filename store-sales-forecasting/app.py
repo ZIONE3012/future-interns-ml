@@ -509,77 +509,77 @@ with tab3:
 
      st.subheader("📈 Forecast Results Overview")
 
-    st.dataframe(
+     st.dataframe(
         forecast_df.head(20),
         use_container_width=True
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= FORECAST SUMMARY ================= #
 
-    total_forecast = int(
+     total_forecast = int(
         forecast_df["Predicted Sales"].sum()
     )
 
-    avg_forecast = int(
+     avg_forecast = int(
         forecast_df["Predicted Sales"].mean()
     )
 
-    peak_forecast = int(
+     peak_forecast = int(
         forecast_df["Predicted Sales"].max()
     )
 
-    col1, col2, col3 = st.columns(3)
+     col1, col2, col3 = st.columns(3)
 
-    col1.metric(
+     col1.metric(
         "Total Forecast Sales",
         f"{total_forecast:,}"
     )
 
-    col2.metric(
+     col2.metric(
         "Average Forecast",
         f"{avg_forecast:,}"
     )
 
-    col3.metric(
+     col3.metric(
         "Peak Forecast",
         f"{peak_forecast:,}"
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= FINAL INSIGHT ================= #
 
-    st.subheader("📍 Final Forecast Insight")
+     st.subheader("📍 Final Forecast Insight")
 
-    st.success(
+     st.success(
         "Forecast analysis suggests continued retail sales stability with opportunities for strategic growth and inventory optimization."
     )
 # ================= TAB 4: PROJECT SUMMARY ================= #
 
 with tab4:
 
-    st.title("📘 Project Summary")
+     st.title("📘 Project Summary")
 
-    st.markdown(
+     st.markdown(
         "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
     )
 
-    st.markdown("---")
+     st.markdown("---")
 
     # ================= PROJECT OVERVIEW ================= #
 
-    st.subheader("📌 Project Overview")
+     st.subheader("📌 Project Overview")
 
-    st.markdown("""
-    This dashboard was developed to analyze retail sales performance,
-    generate future sales forecasts, and provide business intelligence
-    insights for improved decision-making.
+     st.markdown("""
+         This dashboard was developed to analyze retail sales performance,
+        generate future sales forecasts, and provide business intelligence
+        insights for improved decision-making.
 
-    The platform combines interactive analytics, forecasting models,
-    and visualization tools to support retail trend analysis and
-    predictive forecasting.
+        The platform combines interactive analytics, forecasting models,
+        and visualization tools to support retail trend analysis and
+        predictive forecasting.
     """)
 
     st.markdown("---")
