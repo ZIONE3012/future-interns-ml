@@ -608,14 +608,14 @@ if uploaded_file is not None:
 
         st.subheader("⚙️ Dashboard Features")
 
-       st.markdown("""
-    - Interactive retail sales dashboard
-    - AI-powered forecasting visualization
-    - Forecast export functionality
-    - Store performance analytics
-    - Business intelligence insights
-    - Date filtering and forecasting controls
-    - Upload support for datasets and trained models
+        st.markdown("""
+         - Interactive retail sales dashboard
+         - AI-powered forecasting visualization
+         - Forecast export functionality
+         - Store performance analytics
+         - Business intelligence insights
+         - Date filtering and forecasting controls
+         - Upload support for datasets and trained models
     """)
 
     st.markdown("---")
