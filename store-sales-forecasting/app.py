@@ -264,12 +264,12 @@ fig_overview.update_layout(
      height=500
 )
 
-    st.plotly_chart(
-        fig_overview,
-        use_container_width=True
+st.plotly_chart(
+     fig_overview,
+     use_container_width=True
     )
 
-    st.markdown("---")
+st.markdown("---")
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
