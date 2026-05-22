@@ -65,17 +65,16 @@ uploaded_model = st.sidebar.file_uploader(
 st.sidebar.markdown("---")
 
 # ---------------- LOAD DATA ---------------- #
-if uploaded_file is not None and uploaded_model is not None:
+with st.spinner("Loading dashboard...."):
 
-    with st.spinner("Loading dashboard...."):
-
-        # Load dataset
+    if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
 
-        # Load trained model
+    if uploaded_model is not None:
         model = pickle.load(uploaded_model)
 
         # Convert date column
+    if uploaded_file is not None:
         df["date"] = pd.to_datetime(df["date"])
 
         # Create filtered dataframe
