@@ -270,7 +270,7 @@ if uploaded_file is not None:
 
 # ================= TAB 2 : PREDICTIONS ================= #
 
-with tab2:
+    with tab2:
 
         st.title("🔮 Sales Forecasting Center")
 
