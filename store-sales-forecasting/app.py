@@ -608,35 +608,35 @@ if uploaded_file is not None:
 
         st.subheader("⚙️ Dashboard Features")
 
-        st.markdown("""
-          - Interactive retail sales dashboard
-          - AI-powered forecasting visualization
-          - Forecast export functionality
-          - Store performance analytics
-          - Business intelligence insights
-          - Date filtering and forecasting controls
-          - Upload support for datasets and trained models
-           """)
+       st.markdown("""
+    - Interactive retail sales dashboard
+    - AI-powered forecasting visualization
+    - Forecast export functionality
+    - Store performance analytics
+    - Business intelligence insights
+    - Date filtering and forecasting controls
+    - Upload support for datasets and trained models
+    """)
 
-         st.markdown("---")
+    st.markdown("---")
 
     # ================= BUSINESS VALUE ================= #
 
-         st.subheader("📈 Business Value")
+    st.subheader("📈 Business Value")
 
-         st.success(
-           "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business forecasting."
+    st.success(
+        "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business decision-making."
     )
 
-         st.info(
-            "Interactive analytics provide visibility into retail performance trends and future sales opportunities."
+    st.info(
+        "Interactive analytics provide visibility into retail performance trends and forecasting outcomes."
     )
 
-         st.markdown("---")
+    st.markdown("---")
 
     # ================= FINAL NOTE ================= #
 
-         st.subheader("🚀 Final Notes")
+    st.subheader("🚀 Final Notes")
 
          st.markdown("""
           This project demonstrates the integration of machine learning,
