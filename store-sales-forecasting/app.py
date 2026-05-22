@@ -530,24 +530,24 @@ if uploaded_file is not None:
           forecast_df["Predicted Sales"].max()
     )
 
-      col1, col2, col3 = st.columns(3)
+       col1, col2, col3 = st.columns(3)
 
-      col1.metric(
-        "Total Forecast Sales",
-        f"{total_forecast:,}"
+       col1.metric(
+         "Total Forecast Sales",
+         f"{total_forecast:,}"
     )
 
-     col2.metric(
-        "Average Forecast",
-        f"{avg_forecast:,}"
+       col2.metric(
+         "Average Forecast",
+         f"{avg_forecast:,}"
     )
 
-     col3.metric(
-        "Peak Forecast",
+       col3.metric(
+         "Peak Forecast",
         f"{peak_forecast:,}"
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= FINAL INSIGHT ================= #
 
