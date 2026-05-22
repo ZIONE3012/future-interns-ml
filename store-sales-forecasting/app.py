@@ -112,47 +112,47 @@ with st.spinner("Loading dashboard...."):
     st.sidebar.markdown("---")
 
     # ================= DATE FILTERS ================= #
-
+if uploaded_file is not None: 
     st.sidebar.markdown("### 📅 Date Filters")
 
-start_date = st.sidebar.date_input(
-    "Start Date",
-    filtered_df["date"].min()
+    start_date = st.sidebar.date_input(
+        "Start Date",
+        filtered_df["date"].min()
 )
 
-end_date = st.sidebar.date_input(
-    "End Date",
-    filtered_df["date"].max()
+    end_date = st.sidebar.date_input(
+        "End Date",
+        filtered_df["date"].max()
 )
 
-filtered_df = filtered_df[
-    (filtered_df["date"] >= pd.to_datetime(start_date)) &
-    (filtered_df["date"] <= pd.to_datetime(end_date))
+    filtered_df = filtered_df[
+        (filtered_df["date"] >= pd.to_datetime(start_date)) &
+        (filtered_df["date"] <= pd.to_datetime(end_date))
 ]
-st.sidebar.markdown("---")
+    st.sidebar.markdown("---")
 
 #-------------------STORE FILTER -------------------------#
-store = st.sidebar.selectbox(
-     "Select Store",
-     filtered_df["store_nbr"].unique()
+    store = st.sidebar.selectbox(
+         "Select Store",
+         filtered_df["store_nbr"].unique()
 )
 
-forecast_days = st.sidebar.slider(
-    "Forecast Days",
-     min_value=7,
-     max_value=90,
-     value=30
+    forecast_days = st.sidebar.slider(
+        "Forecast Days",
+         min_value=7,
+         max_value=90,
+         value=30
 )
 
-selected_year = st.sidebar.selectbox(
-    "Select Year",
-    filtered_df["year"].unique()
+    selected_year = st.sidebar.selectbox(
+        "Select Year",
+        filtered_df["year"].unique()
 )
 
 # ---------------- HEADER ---------------- #
 st.title(" Store Sales Forecasting Dashboard")
 
-st.markdown("### Real-Time Retail Analytics & Al Forecasting")
+st.markdown("#### Real-Time Retail Analytics & Al Forecasting")
 
 st.markdown("----")
 
