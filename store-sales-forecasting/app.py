@@ -200,11 +200,11 @@ col4.metric(
 st.markdown("------")
   # ================= DATA PREVIEW ================= #
 
-    st.subheader("Dataset Preview")
+st.subheader("Dataset Preview")
 
-    st.dataframe(filtered_df.head(10))
+st.dataframe(filtered_df.head(10))
 
-    st.markdown("---")
+st.markdown("---")
 # ================= SALES TREND CHART ================= #
 
 st.markdown("---")
@@ -237,10 +237,10 @@ st.plotly_chart(
     use_container_width=True
 )
 
-    # ================= TOP STORE REVENUE CHART ================= #
+# ================= TOP STORE REVENUE CHART ================= #
 
-    st.subheader("Store Revenue Analysis")
-
+st.subheader("Store Revenue Analysis")
+ 
     top_locations = (
         df.groupby("store_nbr")["sales"]
         .sum()
