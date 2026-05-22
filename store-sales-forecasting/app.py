@@ -435,41 +435,41 @@ if uploaded_file is not None:
 
 # ================= TAB 3 : BUSINESS INSIGHTS ================= #
 
-  with tab3:
+    with tab3:
 
-     st.title("🧠 Business Insights & Forecast Results")
+       st.title("🧠 Business Insights & Forecast Results")
 
-     st.markdown(
-        "AI-driven business intelligence insights generated from retail sales forecasting and trend analysis."
+       st.markdown(
+          "AI-driven business intelligence insights generated from retail sales forecasting and trend analysis."
     )
 
-     st.markdown("---")
+       st.markdown("---")
 
     # ================= SALES CONTRIBUTION ================= #
 
-     st.subheader("📊 Store Contribution Analysis")
+       st.subheader("📊 Store Contribution Analysis")
 
-     contribution_data = (
-         filtered_df.groupby("store_nbr")["sales"]
-        .sum()
-        .reset_index()
+       contribution_data = (
+          filtered_df.groupby("store_nbr")["sales"]
+         .sum()
+         .reset_index()
     )
 
-     fig_pie = px.pie(
-        contribution_data,
-        names="store_nbr",
-        values="sales",
+       fig_pie = px.pie(
+         contribution_data,
+         names="store_nbr",
+         values="sales",
         title="Store Sales Contribution"
     )
 
-     fig_pie.update_layout(
-        template="plotly_dark",
-        height=550
+       fig_pie.update_layout(
+         template="plotly_dark",
+         height=550
     )
 
-     st.plotly_chart(
-        fig_pie,
-        use_container_width=True
+       st.plotly_chart(
+         fig_pie,
+         use_container_width=True
     )
 
      st.markdown("---")
