@@ -20,7 +20,7 @@ st.markdown("""
     font-size: 4.9rem;
     font-weight: 800;
     color: #f1f3f6;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.2rem;
     line-height: 1.1;
 }
 
@@ -59,17 +59,17 @@ st.divider()
 
 st.sidebar.markdown("### Settings")
 
-use_oil = st.checkbox(
+use_oil = st.sidebar.checkbox(
     "Include Oil Price Feature",
      value=True
     )
 
-use_holidays = st.checkbox(
+use_holidays = st.sidebar.checkbox(
      "Include Holiday Features",
       value=True
     )
 
-fourier_order = st.slider(
+fourier_order = st.sidebar.slider(
     "Fourier Order",
      0,
      10,
