@@ -459,7 +459,7 @@ if uploaded_file is not None:
             st.subheader("📈 Forecast Visualization")
 
             fig_forecast = px.area(
-                forecast_df,
+                st.session_state["forecast_df"],
                 x="Date",
                 y="Predicted Sales",
                 title="AI-Powered Future Sales Forecast"
@@ -484,7 +484,7 @@ if uploaded_file is not None:
             st.subheader("📊 Forecast Results Table")
 
             st.dataframe(
-                forecast_df.head(15),
+                st.session_state["forecast_df"].head(15),
                 use_container_width=True
     )
 
@@ -493,16 +493,19 @@ if uploaded_file is not None:
     # ================= FORECAST ANALYTICS ================= #
 
             avg_prediction = int(
-                forecast_df["Predicted Sales"].mean()
-    )
+                st.session_state["forecast_df"]
+            ["Predicted Sales"].mean()
+            )
 
             max_prediction = int(
-                forecast_df["Predicted Sales"].max()
-    )
+                st.session_state["forecast_df"]
+            ["Predicted Sales"].max()
+            )
 
             min_prediction = int(
-                forecast_df["Predicted Sales"].min()
-    )
+                st.session_state["forecast_df"]
+            ["Predicted Sales"].min()
+            )
 
             col4, col5, col6 = st.columns(3)
 
