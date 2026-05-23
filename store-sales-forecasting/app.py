@@ -65,7 +65,7 @@ use_oil = st.checkbox(
      value=True
     )
 
- use_holidays = st.checkbox(
+use_holidays = st.checkbox(
      "Include Holiday Features",
       value=True
     )
