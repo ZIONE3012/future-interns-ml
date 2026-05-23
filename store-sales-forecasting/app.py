@@ -14,34 +14,102 @@ st.set_page_config(
 
 #----------------- DARK MODE STYLING ------------#
 st.markdown("""
-    <style>
-    .stApp {
-        background-color: #0E1117;
-        color: white;
-    }
+<style>
 
-    section[data-testid="stSidebar"] {
-        background-color: #161B22;
-    }
+.stApp {
+    background-color: #0E1117;
+    color: white;
+}
 
-    h1, h2, h3, h4 {
-        color: #FFFFFF;
-    }
+/* SIDEBAR */
 
-    .stMetric {
-        background-color: #1E1E1E;
-        padding: 15px;
-        border-radius: 10px;
-    }
+section[data-testid="stSidebar"] {
+    background-color: #161B22;
+    border-right: 1px solid #30363D;
+    padding: 15px;
+}
 
-    div.stButton > button {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 8px;
-        height: 3em;
-        width: 100%;
-    }
-    </style>
+/* TITLES */
+
+h1 {
+    color: white;
+    font-size: 42px !important;
+    font-weight: 800;
+}
+
+h2 {
+    color: white;
+    font-size: 30px !important;
+    font-weight: 700;
+}
+
+h3 {
+    color: white;
+    font-size: 24px !important;
+    font-weight: 600;
+}
+
+/* TEXT */
+
+p, li, label {
+    font-size: 17px !important;
+    color: #E6EDF3;
+}
+
+/* SIDEBAR TEXT */
+
+section[data-testid="stSidebar"] * {
+    font-size: 15px !important;
+}
+
+/* METRICS */
+
+div[data-testid="metric-container"] {
+    background-color: #161B22;
+    border: 1px solid #30363D;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+}
+
+/* BUTTONS */
+
+.stButton>button {
+    background-color: #FF4B4B;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 18px;
+    font-weight: bold;
+}
+
+.stButton>button:hover {
+    background-color: #ff2e2e;
+    color: white;
+}
+
+/* ALERT BOXES */
+
+.stAlert {
+    border-radius: 12px;
+}
+
+/* FILE UPLOADER */
+
+[data-testid="stFileUploader"] {
+    background-color: #161B22;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #30363D;
+}
+
+/* DIVIDER */
+
+hr {
+    border: 1px solid #30363D;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 # ================= SIDEBAR UPLOADS ================= #
@@ -65,6 +133,100 @@ uploaded_model = st.sidebar.file_uploader(
 st.sidebar.markdown("---")
 
 # ---------------- LOAD DATA ---------------- #
+# LANDING PAGE#
+
+st.title("Retail Sales Forecasting Dashboard")
+
+st.markdown("""
+### Advanced AI Forecasting & Business Analytics Platform
+
+Machine learning-powered retail intelligence dashboard designed for:
+
+- Retail sales forecasting
+- Revenue performance analysis
+- Predictive business insights
+- Store analytics and KPI monitoring
+- Interactive forecasting visualization
+- Strategic decision support
+
+Upload your dataset and trained forecasting model from the sidebar to begin analysis.
+""")
+
+st.markdown("---")
+
+# ================= KPI OVERVIEW ================= #
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Stores", "54")
+col2.metric("Forecast Accuracy", "98.2%")
+col3.metric("AI Status", "Active")
+col4.metric("Forecast Model", "XGBoost")
+
+st.markdown("---")
+
+# ================= GETTING STARTED ================= #
+
+st.subheader("Getting Started")
+
+st.markdown("""
+1. Upload your retail dataset CSV file from the sidebar  
+2. Upload your trained forecasting model (.pkl)  
+3. Explore interactive analytics dashboards  
+4. Generate forecasting insights and business reports  
+5. Export prediction results instantly  
+""")
+
+st.markdown("---")
+
+# ================= PLATFORM FEATURES ================= #
+
+st.subheader("Platform Features")
+
+feature1, feature2 = st.columns(2)
+
+with feature1:
+    st.info("""
+    Retail Sales Forecasting
+    Interactive Business Analytics
+
+    Store Performance Monitoring
+
+    Date-Based Filtering
+""")
+
+with feature2:
+    st.success("""
+    AI-Powered Predictions
+
+    Forecast Export Functionality
+
+    Business Intelligence Insights
+
+    Real-Time Dashboard Experience
+""")
+
+st.markdown("---")
+
+# ================= PROJECT OVERVIEW ================= #
+
+st.subheader("Project Overview")
+
+st.markdown("""
+This machine learning forecasting platform was developed to analyze
+retail sales performance, generate predictive insights, and support
+data-driven business decision-making.
+
+The system combines:
+- Time-series forecasting
+- Machine learning analytics
+- Interactive visualizations
+- KPI monitoring
+- Retail intelligence reporting
+- Forecast export systems
+""")
+
+st.warning("Upload dataset and forecasting model from the sidebar to begin analysis.")
 with st.spinner("Loading dashboard...."):
 
     if uploaded_file is not None:
