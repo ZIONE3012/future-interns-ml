@@ -265,7 +265,24 @@ if uploaded_file is not None:
     st.markdown("#### Real-Time Retail Analytics & Al Forecasting")
 
     st.markdown("----")
+# Generate AI-style future predictions
+            last_sales = (
+                df.groupby("date")["sales"]
+                .sum()
+                .tail(1)
+                .values[0]
+        )
 
+            future_predictions = []
+
+            for i in range(forecast_days):
+                predicted_value = last_sales * (1 + (i * 0.02))
+                future_predictions.append(predicted_value)
+
+            forecast_df = pd.DataFrame({
+                "Date": future_dates,
+                "Predicted Sales": future_predictions
+        })
     tab1, tab2, tab3, tab4 = st.tabs([
         "Overview",
         "Predictions",
@@ -431,24 +448,7 @@ if uploaded_file is not None:
                 periods=forecast_days
         )
 
-        # Generate AI-style future predictions
-            last_sales = (
-                df.groupby("date")["sales"]
-                .sum()
-                .tail(1)
-                .values[0]
-        )
-
-            future_predictions = []
-
-            for i in range(forecast_days):
-                predicted_value = last_sales * (1 + (i * 0.02))
-                future_predictions.append(predicted_value)
-
-            forecast_df = pd.DataFrame({
-                "Date": future_dates,
-                "Predicted Sales": future_predictions
-        })
+        
     # ================= FORECAST CHART ================= #
 
             st.subheader("📈 Forecast Visualization")
