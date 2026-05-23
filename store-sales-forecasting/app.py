@@ -5,6 +5,10 @@ import numpy as np
 import plotly.express as px
 import pickle
 import xgboost
+
+#=====
+if "forecast_df" not in st.session_state:
+    st.session_state["forecast_df"] = None
 # ---------------- PAGE CONFIG ---------------- #
 st.set_page_config(
     page_title="Sales Forecast Dashboard",
@@ -265,24 +269,6 @@ if uploaded_file is not None:
     st.markdown("#### Real-Time Retail Analytics & Al Forecasting")
 
     st.markdown("----")
-# Generate AI-style future predictions
-    last_sales = (
-        df.groupby("date")["sales"]
-        .sum()
-        .tail(1)
-        .values[0]
-    )
-
-    future_predictions = []
-
-    for i in range(forecast_days):
-        predicted_value = last_sales * (1 + (i * 0.02))
-        future_predictions.append(predicted_value)
-
-    forecast_df = pd.DataFrame({
-        "Date": future_dates,
-        "Predicted Sales": future_predictions
-})
 
     tab1, tab2, tab3, tab4 = st.tabs([
         "Overview",
@@ -447,7 +433,26 @@ if uploaded_file is not None:
             future_dates = pd.date_range(
                 start=df["date"].max(),
                 periods=forecast_days
-        )
+     )
+            # Generate AI-style future predictions
+            last_sales = (
+                df.groupby("date")["sales"]
+                .sum()
+                .tail(1)
+                .values[0]
+    )
+
+            future_predictions = []
+
+            for i in range(forecast_days):
+                predicted_value = last_sales * (1 + (i * 0.02))
+                future_predictions.append(predicted_value)
+
+            st.session_state["forecast_df"] = pd.DataFrame({
+                "Date": future_dates,
+                "Predicted Sales": future_predictions
+            })
+
 
         
     # ================= FORECAST CHART ================= #
@@ -621,7 +626,7 @@ if uploaded_file is not None:
        st.subheader("📈 Forecast Results Overview")
 
        st.dataframe(
-          forecast_df.head(20),
+          st.session_state["forecast_df"].head(20),
           use_container_width=True
     )
 
@@ -630,16 +635,19 @@ if uploaded_file is not None:
     # ================= FORECAST SUMMARY ================= #
 
        total_forecast = int(
-         forecast_df["Predicted Sales"].sum()
-    )
+             st.session_state["forecast_df"]
+        ["Predicted Sales"].sum()
+        )
 
        avg_forecast = int(
-         forecast_df["Predicted Sales"].mean()
-    )
+            st.session_state["forecast_df"]
+       ["Predicted Sales"].mean()
+       )
 
        peak_forecast = int(
-          forecast_df["Predicted Sales"].max()
-    )
+             st.session_state["forecast_df"]
+       ["Predicted Sales"].max()
+       )
 
        col1, col2, col3 = st.columns(3)
 
