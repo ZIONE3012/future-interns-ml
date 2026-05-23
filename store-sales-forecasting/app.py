@@ -54,8 +54,6 @@ section[data-testid="stSidebar"] {
 
 st.sidebar.title("🧠 Forecast Studio")
 
-st.divider()
-
 # SETTINGS
 
 st.sidebar.markdown("### Settings")
@@ -122,7 +120,6 @@ st.markdown("""
 Upload your dataset and trained forecasting model from the sidebar to begin analysis.
 """)
 
-st.markdown("---")
 
 # ================= GETTING STARTED ================= #
 
