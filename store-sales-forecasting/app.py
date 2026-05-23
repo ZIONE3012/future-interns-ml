@@ -56,7 +56,7 @@ st.caption("Machine Learning Sales Forecasting")
 
 st.divider()
 
-    # SETTINGS
+# SETTINGS
 
 st.markdown("### Settings")
 
@@ -74,7 +74,7 @@ fourier_order = st.slider(
     "Fourier Order",
      0,
      10,
-     FOURIER_ORDER
+     4
     )
 
 st.divider()
