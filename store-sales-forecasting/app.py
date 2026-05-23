@@ -116,9 +116,9 @@ st.sidebar.divider()
 st.markdown('<h1 class="main-title">📈 Retail Sales Forecasting Dashboard</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Forecasting retail demand and analyzing sales performance using machine learning and interactive analytics · Corporación Favorita · Ecuador</p>', unsafe_allow_html=True)
 
-st.markdown("""
-Upload your dataset and trained forecasting model from the sidebar to begin analysis.
-""")
+st.info(
+ "📂Upload your dataset and trained forecasting model from the sidebar to begin analysis."
+)
 
 
 # ================= GETTING STARTED ================= #
