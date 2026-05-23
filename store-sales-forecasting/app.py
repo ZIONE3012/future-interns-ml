@@ -422,9 +422,8 @@ if uploaded_file is not None:
     )
 
     # ================= GENERATE BUTTON ================= #
-        generate_forecast = st.button(
-            "🚀 Generate Forecast"
-    )
+        generate_forecast = st.toggle(
+            "🚀 Generate Forecast")
 
         if generate_forecast:
 
@@ -622,6 +621,9 @@ if uploaded_file is not None:
        st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
+     if st.session_state["forecast_df"] is None:
+        st.info(" Please generate the forecast in Tab2 first!")
+        st.stop()
 
        st.subheader("📈 Forecast Results Overview")
 
