@@ -174,8 +174,6 @@ st.warning(
     "Upload dataset and forecasting model from the sidebar to begin analysis."
 ) 
 
-st.stop()
-
 with st.spinner("Loading dashboard...."):
 
     if uploaded_file is not None:
