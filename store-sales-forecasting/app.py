@@ -266,23 +266,24 @@ if uploaded_file is not None:
 
     st.markdown("----")
 # Generate AI-style future predictions
-            last_sales = (
-                df.groupby("date")["sales"]
-                .sum()
-                .tail(1)
-                .values[0]
-        )
+    last_sales = (
+        df.groupby("date")["sales"]
+        .sum()
+        .tail(1)
+        .values[0]
+    )
 
-            future_predictions = []
+    future_predictions = []
 
-            for i in range(forecast_days):
-                predicted_value = last_sales * (1 + (i * 0.02))
-                future_predictions.append(predicted_value)
+    for i in range(forecast_days):
+        predicted_value = last_sales * (1 + (i * 0.02))
+        future_predictions.append(predicted_value)
 
-            forecast_df = pd.DataFrame({
-                "Date": future_dates,
-                "Predicted Sales": future_predictions
-        })
+    forecast_df = pd.DataFrame({
+        "Date": future_dates,
+        "Predicted Sales": future_predictions
+})
+
     tab1, tab2, tab3, tab4 = st.tabs([
         "Overview",
         "Predictions",
