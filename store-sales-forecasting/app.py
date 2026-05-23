@@ -17,16 +17,17 @@ st.markdown("""
 <style>
 
 .main-title {
-    font-size: 2.1rem;
+    font-size: 2.9rem;
     font-weight: 800;
     color: #f1f3f6;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
+    line-height: 1.1;
 }
 
 .sub-title {
     font-size: 1rem;
     color: #9ca3af;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .section-header {
@@ -51,6 +52,32 @@ section[data-testid="stSidebar"] {
 # ================= SIDEBAR UPLOADS ================= #
 
 st.sidebar.title("🧠 Forecast Studio")
+st.caption("Machine Learning Sales Forecasting")
+
+st.divider()
+
+    # SETTINGS
+
+st.markdown("### Settings")
+
+use_oil = st.checkbox(
+    "Include Oil Price Feature",
+     value=True
+    )
+
+ use_holidays = st.checkbox(
+     "Include Holiday Features",
+      value=True
+    )
+
+fourier_order = st.slider(
+    "Fourier Order",
+     0,
+     10,
+     FOURIER_ORDER
+    )
+
+st.divider()
 
 st.sidebar.markdown("---")
 
@@ -68,11 +95,28 @@ uploaded_model = st.sidebar.file_uploader(
 
 st.sidebar.markdown("---")
 
+st.sidebar.divider()
+
+st.sidebar.markdown("### Platform Information")
+
+st.sidebar.info("""
+    Retail Sales Forecasting Dashboard
+    Developed by **Nsisong Akpaikpe**
+
+    Machine Learning • Forecasting • Analytics
+    """)
+
+st.sidebar.markdown(
+    "[View GitHub Profile](https://github.com/ZIONE3012/future-interns-ml)"
+)
+
+st.sidebar.divider()
+
 # ---------------- LOAD DATA ---------------- #
 # LANDING PAGE#
 
 st.markdown('<p class="main-title">📈 Retail Sales Forecasting Dashboard</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Machine Learning–Driven Time Series Forecasting · Corporación Favorita · Ecuador</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Forecasting retail demand and analyzing sales performance using machine learning and interactive analytics · Corporación Favorita · Ecuador</p>', unsafe_allow_html=True)
 
 st.markdown("""
 Upload your dataset and trained forecasting model from the sidebar to begin analysis.
@@ -96,29 +140,20 @@ st.markdown("---")
 
 # ================= PLATFORM FEATURES ================= #
 
-st.subheader("Platform Features")
+st.subheader("Dataset Information")
 
-feature1, feature2 = st.columns(2)
+st.markdown("""
+- Dataset: Corporación Favorita Grocery Sales Forecasting
 
-with feature1:
-    st.info("""
-    Retail Sales Forecasting
-    Interactive Business Analytics
+- Stores: 54 retail stores
 
-    Store Performance Monitoring
+- Product Families: 33 categories
 
-    Date-Based Filtering
-""")
+- Forecasting Model: XGBoost
 
-with feature2:
-    st.success("""
-    AI-Powered Predictions
+- Framework: Streamlit
 
-    Forecast Export Functionality
-
-    Business Intelligence Insights
-
-    Real-Time Dashboard Experience
+- Visualization Tools: Plotly & Matplotlib
 """)
 
 st.markdown("---")
@@ -128,15 +163,14 @@ st.markdown("---")
 st.subheader("Project Overview")
 
 st.markdown("""
-This project uses retail sales data from Corporación Favorita, Ecuador,to analyze
-retail sales performance and to generate sales forecast using machine learning models and time-series forecasting techniques.
+This project uses retail sales data from Corporación Favorita, Ecuador,to generate sales forecast using machine learning models and time-series forecasting techniques.
 The system combines:
 - XGBoost forecasting models
 - Machine learning analytics
-- Interactive visualizations
+- Interactive sales visualizations
 - KPI monitoring
 - Retail intelligence reporting
-- Forecast export systems
+- Forecast generation and export
 """)
 
 st.warning(
@@ -191,23 +225,6 @@ with st.spinner("Loading dashboard...."):
 
     st.sidebar.markdown("---")
 
-    st.sidebar.divider()
-
-    st.sidebar.markdown("### Platform Information")
-
-    st.sidebar.info("""
-    Retail Sales Forecasting Dashboard
-
-    Developed by **Nsisong Akpaikpe**
-
-    Machine Learning • Forecasting • Analytics
-    """)
-
-    st.sidebar.markdown(
-    "[View GitHub Profile](https://github.com/ZIONE3012/future-interns-ml)"
-)
-
-    st.sidebar.divider()
 
     # ================= DATE FILTERS ================= #
 if uploaded_file is not None: 
