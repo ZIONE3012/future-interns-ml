@@ -621,9 +621,9 @@ if uploaded_file is not None:
        st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
-     if st.session_state["forecast_df"] is None:
-        st.info(" Please generate the forecast in Tab2 first!")
-        st.stop()
+    if st.session_state["forecast_df"] is None:
+       st.info(" Please generate the forecast in Tab2 first!")
+       st.stop()
 
        st.subheader("📈 Forecast Results Overview")
 
