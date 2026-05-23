@@ -17,8 +17,8 @@ st.markdown("""
 <style>
 
 .main-title {
-    font-size: 4.9rem;
-    font-weight: 800;
+    font-size: 4.9rem !important;
+    font-weight: 800 !important;
     color: #f1f3f6;
     margin-bottom: 0.2rem;
     line-height: 1.1;
@@ -27,6 +27,7 @@ st.markdown("""
 .sub-title {
     font-size: 1.5rem;
     color: #9ca3af;
+    margin-top: -0.4rem;
     margin-bottom: 1.2rem;
 }
 
@@ -114,8 +115,8 @@ st.sidebar.divider()
 # ---------------- LOAD DATA ---------------- #
 # LANDING PAGE#
 
-st.markdown('<p class="main-title">📈 Retail Sales Forecasting Dashboard</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Forecasting retail demand and analyzing sales performance using machine learning and interactive analytics · Corporación Favorita · Ecuador</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">📈 Retail Sales Forecasting Dashboard</h1>', unsafe_allow_html=True)
+st.markdown('<h2 class="sub-title">Forecasting retail demand and analyzing sales performance using machine learning and interactive analytics · Corporación Favorita · Ecuador</h2>', unsafe_allow_html=True)
 
 st.markdown("""
 Upload your dataset and trained forecasting model from the sidebar to begin analysis.
