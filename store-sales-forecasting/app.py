@@ -17,7 +17,7 @@ st.markdown("""
 <style>
 
 .main-title {
-    font-size: 2.9rem;
+    font-size: 4.9rem;
     font-weight: 800;
     color: #f1f3f6;
     margin-bottom: 0.1rem;
@@ -25,7 +25,7 @@ st.markdown("""
 }
 
 .sub-title {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #9ca3af;
     margin-bottom: 1.2rem;
 }
@@ -52,13 +52,12 @@ section[data-testid="stSidebar"] {
 # ================= SIDEBAR UPLOADS ================= #
 
 st.sidebar.title("🧠 Forecast Studio")
-st.caption("Machine Learning Sales Forecasting")
 
 st.divider()
 
 # SETTINGS
 
-st.markdown("### Settings")
+st.sidebar.markdown("### Settings")
 
 use_oil = st.checkbox(
     "Include Oil Price Feature",
