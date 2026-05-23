@@ -542,7 +542,7 @@ if uploaded_file is not None:
 
     # ================= DOWNLOAD SECTION ================= #
 
-            csv = forecast_df.to_csv(index=False).encode("utf-8")
+            csv = st.session_state["forecast_df"].to_csv(index=False).encode("utf-8")
 
             st.download_button(
                 label="📥 Download Forecast Results",
