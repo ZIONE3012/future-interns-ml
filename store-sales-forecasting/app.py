@@ -742,26 +742,26 @@ if uploaded_file is not None:
 
     # ================= BUSINESS VALUE ================= #
 
-    st.subheader("📈 Business Value")
+        st.subheader("📈 Business Value")
 
-    st.success(
-        "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business decision-making."
+        st.success(
+            "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business decision-making."
     )
 
-    st.info(
-        "Interactive analytics provide visibility into retail performance trends and forecasting outcomes."
+        st.info(
+            "Interactive analytics provide visibility into retail performance trends and forecasting outcomes."
     )
 
-    st.markdown("---")
+        st.markdown("---")
 
     # ================= FINAL NOTE ================= #
 
-    st.subheader("🚀 Final Notes")
+        st.subheader("🚀 Final Notes")
 
-    st.markdown("""
-        This project demonstrates the integration of machine learning,
-        business analytics, and interactive dashboard development using
-        Streamlit, Plotly, and predictive forecasting models.
+        st.markdown("""
+            This project demonstrates the integration of machine learning,
+            business analytics, and interactive dashboard development using
+            Streamlit, Plotly, and predictive forecasting models.
     """)
 
     st.markdown("---")
