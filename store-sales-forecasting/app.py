@@ -742,17 +742,17 @@ if uploaded_file is not None:
 
     # ================= BUSINESS VALUE ================= #
 
-        st.subheader("📈 Business Value")
+         st.subheader("📈 Business Value")
 
-        st.success(
+         st.success(
             "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business decision-making."
     )
 
-        st.info(
+         st.info(
             "Interactive analytics provide visibility into retail performance trends and forecasting outcomes."
     )
 
-        st.markdown("---")
+         st.markdown("---")
 
     # ================= FINAL NOTE ================= #
 
