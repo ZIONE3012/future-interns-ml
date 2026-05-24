@@ -738,7 +738,7 @@ if uploaded_file is not None:
          - Upload support for datasets and trained models
     """)
 
-         st.markdown("---")
+        st.markdown("---")
 
     # ================= BUSINESS VALUE ================= #
 
