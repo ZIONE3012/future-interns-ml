@@ -764,7 +764,7 @@ if uploaded_file is not None:
             Streamlit, Plotly, and predictive forecasting models.
     """)
 
-          st.markdown("---")
+         st.markdown("---")
 
 # ---------------- FOOTER ---------------- #
     st.markdown("---")
