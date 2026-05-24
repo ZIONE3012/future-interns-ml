@@ -738,11 +738,11 @@ if uploaded_file is not None:
          - Upload support for datasets and trained models
     """)
 
-    st.markdown("---")
+         st.markdown("---")
 
     # ================= BUSINESS VALUE ================= #
 
-          st.subheader("📈 Business Value")
+         st.subheader("📈 Business Value")
 
          st.success(
             "The forecasting dashboard supports inventory planning, sales monitoring, revenue analysis, and strategic business decision-making."
