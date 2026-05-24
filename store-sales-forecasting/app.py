@@ -624,7 +624,7 @@ if uploaded_file is not None:
        st.markdown("---")
 
     # ================= FORECAST RESULTS ================= #
-    if st.session_state["forecast_df"] is None:
+    if st.session_state["forecast_df"] is None and tab3:
        st.info(" Please generate the forecast in Tab2 first!")
        st.stop()
 
@@ -685,10 +685,6 @@ if uploaded_file is not None:
     with tab4:
 
         st.title("📘 Project Summary")
-
-        st.markdown(
-            "Retail sales forecasting dashboard developed using machine learning and time-series forecasting techniques."
-    )
 
         st.markdown("---")
 
