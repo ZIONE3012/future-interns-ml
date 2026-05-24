@@ -756,15 +756,15 @@ if uploaded_file is not None:
 
     # ================= FINAL NOTE ================= #
 
-         st.subheader("🚀 Final Notes")
+        st.subheader("🚀 Final Notes")
 
-         st.markdown("""
+        st.markdown("""
             This project demonstrates the integration of machine learning,
             business analytics, and interactive dashboard development using
             Streamlit, Plotly, and predictive forecasting models.
     """)
 
-         st.markdown("---")
+        st.markdown("---")
 
 # ---------------- FOOTER ---------------- #
     st.markdown("---")
